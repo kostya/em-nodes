@@ -11,7 +11,7 @@ end
 
 class Server2 < EM::Nodes::Server
   def ping(a)
-    send_pong(a)
+    send_pong(a + 1)
   end
 end
 
@@ -26,6 +26,6 @@ describe "Simple spec" do
       $client22.send_ping(2)
     end
 
-    $pong.should == [1, 2]
+    $pong.should == [2, 3]
   end
 end
