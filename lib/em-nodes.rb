@@ -10,7 +10,7 @@ module EM::Nodes
     end
 
     def logger
-      @_logger ||= Logger.new(nil)
+      @_logger ||= Logger.new(STDOUT)
     end
 
     def exception(ex)

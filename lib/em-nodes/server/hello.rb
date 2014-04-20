@@ -4,7 +4,7 @@ module EM::Nodes::Server::Hello
     send_who_are_you?
   end
 
-  def i_am(params)
+  def on_i_am(params)
     params.each do |key, value|
       self.data[key] = value
     end

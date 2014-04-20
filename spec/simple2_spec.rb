@@ -3,14 +3,14 @@ require File.dirname(__FILE__) + '/spec_helper'
 $pong = []
 
 class Client2 < EM::Nodes::Client
-  def pong(a)
+  def on_pong(a)
     $pong << a
     EM.stop if $pong.size >= 2
   end
 end
 
 class Server2 < EM::Nodes::Server
-  def ping(a)
+  def on_ping(a)
     send_pong(a + 1)
   end
 end

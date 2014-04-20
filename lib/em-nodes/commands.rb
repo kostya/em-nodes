@@ -5,7 +5,7 @@ module EM::Nodes::Commands
       return
     end
 
-    method = h[:method]
+    method = "on_#{h[:method]}"
     args = h[:args]
     EM::Nodes.logger.debug "<= #{method} #{args}"
     t = Time.now

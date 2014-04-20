@@ -4,16 +4,16 @@ Bundler.require
 class ChatServer < EM::Nodes::Server
   def post_init
     super
-    client.send_who_are_you?
+    send_who_are_you?
   end
 
-  def i_am(name)
-    client.data.name = name
+  def on_i_am(name)
+    self.data.name = name
     to_all "> coming #{name} <"
   end
 
-  def say(msg)
-    to_all "#{client.data.name} say: #{msg}"
+  def on_say(msg)
+    to_all "#{data.name} say: #{msg}"
   end
 
   def to_all(msg)
@@ -22,7 +22,7 @@ class ChatServer < EM::Nodes::Server
 
   def unbind
     super
-    to_all("quiting #{client.data.name}")
+    to_all("quiting #{data.name}")
   end
 end
 

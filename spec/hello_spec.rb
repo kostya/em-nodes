@@ -11,7 +11,7 @@ end
 class Server3 < EM::Nodes::Server
   include EM::Nodes::Server::Hello
 
-  def i_am(params)
+  def on_i_am(params)
     super
     $client3_result = self.data
     EM.stop

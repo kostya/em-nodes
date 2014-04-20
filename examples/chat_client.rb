@@ -8,11 +8,11 @@ class ChatClient < EM::Nodes::Client
     super
   end
 
-  def who_are_you?
-    server.send_i_am @name
+  def on_who_are_you?
+    send_i_am @name
   end
 
-  def say(msg)
+  def on_say(msg)
     puts msg
   end
 
@@ -23,7 +23,7 @@ class ChatClient < EM::Nodes::Client
 end
 
 def say(msg)
-  $cl.server.send_say(msg)
+  $cl.send_say(msg)
 end
 
 EM.run do
