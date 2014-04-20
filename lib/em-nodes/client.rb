@@ -1,4 +1,6 @@
 class EM::Nodes::Client < EM::Connection
+  autoload :Hello, 'em-nodes/client/hello'
+
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
   include EM::Nodes::AbstractCommand

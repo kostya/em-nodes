@@ -2,6 +2,8 @@ require 'socket'
 require 'ostruct'
 
 class EM::Nodes::Server < EM::Connection
+  autoload :Hello, 'em-nodes/server/hello'
+
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
   include EM::Nodes::AbstractCommand
