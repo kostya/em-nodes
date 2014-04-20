@@ -6,7 +6,7 @@ module EM::Nodes::AbstractCommand
 
     unless method.start_with?(COMMAND_PREFIX)
       EM::Nodes.logger.debug "unknown send #{method} #{args.inspect}"
-      super
+      super(method, *args)
       return
     end
 
