@@ -7,7 +7,7 @@ class Client1 < EM::Nodes::Client
   end
 
   def who_are_you?
-    server.send_i_am @name
+    send_i_am @name
   end
 
   def unbind
@@ -19,13 +19,13 @@ end
 class Server1 < EM::Nodes::Server
   def post_init
     super
-    client.send_who_are_you?
+    send_who_are_you?
   end
 
   def i_am(name)
-    client.data.name = name
+    self.data.name = name
     $client1_result = { :name => name, :clients => Server1.clients.clone }
-    client.send_unbind
+    send_unbind
   end
 end
 

@@ -11,7 +11,7 @@ end
 
 class Server2 < EM::Nodes::Server
   def ping(a)
-    client.send_pong(a)
+    send_pong(a)
   end
 end
 
@@ -22,8 +22,8 @@ describe "Simple spec" do
       $client21 = Client2.connect('127.0.0.1', 19993)
       $client22 = Client2.connect('127.0.0.1', 19993)
 
-      $client21.server.send_ping(1)
-      $client22.server.send_ping(2)
+      $client21.send_ping(1)
+      $client22.send_ping(2)
     end
 
     $pong.should == [1, 2]

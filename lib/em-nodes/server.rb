@@ -1,12 +1,10 @@
 require 'socket'
+require 'ostruct'
 
 class EM::Nodes::Server < EM::Connection
-  autoload :Client, 'em-nodes/server/client'
-
-  attr_reader :client
-
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
+  include EM::Nodes::AbstractCommand
 
   class << self
     def clients
@@ -17,6 +15,8 @@ class EM::Nodes::Server < EM::Connection
       clients.select &:alive
     end
   end
+
+  attr_reader :data
 
   def accept?(host, port)
     true
@@ -35,14 +35,15 @@ class EM::Nodes::Server < EM::Connection
       return
     end
 
-    @client = EM::Nodes::Server::Client.new(self)
-    self.class.clients << @client
+    @data = OpenStruct.new
+    @alive = true
+    self.class.clients << self
     EM::Nodes.logger.info "Incomming connection from #{host}:#{port}"
   end
 
   def unbind
-    @client.disconnect!
-    self.class.clients.delete @client
+    @alive = false
+    self.class.clients.delete self
     EM::Nodes.logger.info "Client has disconnected"
   end
 

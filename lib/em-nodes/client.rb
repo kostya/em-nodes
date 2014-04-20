@@ -1,18 +1,15 @@
 class EM::Nodes::Client < EM::Connection
-  autoload :Server, 'em-nodes/client/server'
-
-  attr_reader :server
-
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
+  include EM::Nodes::AbstractCommand
 
   def post_init
-    @server = EM::Nodes::Client::Server.new(self)
+    @alive = true
     EM::Nodes.logger.debug "Connected to server"
   end
 
   def unbind
-    @server.disconnect!
+    @alive = false
     EM::Nodes.logger.warn "connection has terminated"
   end
 

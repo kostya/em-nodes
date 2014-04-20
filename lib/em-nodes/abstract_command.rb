@@ -11,7 +11,7 @@ module EM::Nodes::AbstractCommand
     end
 
     if @alive
-      @connection.send_command(method.sub(COMMAND_PREFIX, ''), args)
+      send_command(method.sub(COMMAND_PREFIX, ''), args)
     else
       EM::Nodes.logger.error "failed command attempt #{method}, connection dead"
     end
