@@ -5,8 +5,8 @@ module EM::Nodes::Commands
       return
     end
 
-    method = "on_#{h[:method]}"
-    args = h[:args]
+    method = "on_#{h['method']}"
+    args = h['args']
     EM::Nodes.logger.debug "<= #{method} #{args.inspect}"
     t = Time.now
     send(method, *args)
@@ -16,7 +16,7 @@ module EM::Nodes::Commands
   end
 
   def send_command(method, args)
-    obj = {:method => method, :args => args}
+    obj = {'method' => method.to_s, 'args' => args}
     EM::Nodes.logger.debug "=> #{method}"
     EM.schedule { send_object(obj) }
   end

@@ -5,7 +5,7 @@ class EM::Nodes::Server < EM::Connection
   autoload :Hello,  'em-nodes/server/hello'
   autoload :Task,   'em-nodes/server/task'
 
-  include EM::P::ObjectProtocol
+  include EM::P::MsgpackProtocol
   include EM::Nodes::Commands
   include EM::Nodes::AbstractCommand
 

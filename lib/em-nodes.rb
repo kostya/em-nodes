@@ -1,4 +1,5 @@
 require 'eventmachine'
+require 'msgpack_protocol'
 require 'logger'
 
 module EM::Nodes
