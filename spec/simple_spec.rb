@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 class Client1 < EM::Nodes::Client
   def initialize(name)
     @name = name
-    super
+    super()
   end
 
   def on_who_are_you?
