@@ -1,5 +1,5 @@
 class EM::Nodes::Client
-  module Task
+  module TaskFeature
     def on_task_internal(task_id, data)
       on_task(task_id, data)
     end

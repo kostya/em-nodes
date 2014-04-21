@@ -6,8 +6,8 @@ CLIENTS_COUNT = 5
 TASKS_COUNT = 100000
 
 class Server < EM::Nodes::Server
-  include Hello
-  include Task
+  include HelloFeature
+  include TaskFeature
 
   def on_task_result(res)
     $res_count += 1

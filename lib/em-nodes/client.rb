@@ -1,6 +1,6 @@
 class EM::Nodes::Client < EM::Connection
-  autoload :Hello,  'em-nodes/client/hello'
-  autoload :Task,   'em-nodes/client/task'
+  autoload :HelloFeature,  'em-nodes/client/hello'
+  autoload :TaskFeature,   'em-nodes/client/task'
 
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands

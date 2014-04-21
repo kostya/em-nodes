@@ -1,7 +1,7 @@
 require 'thread'
 
 class EM::Nodes::Server
-  module Task
+  module TaskFeature
     def initialize(*args)
       super(*args)
       @mutex = Mutex.new

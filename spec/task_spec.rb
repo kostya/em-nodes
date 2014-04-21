@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 
 
 class Client4 < EM::Nodes::Client
-  include Task
+  include TaskFeature
 
   def on_task(task_id, data)
     $client4_results << data
@@ -11,7 +11,7 @@ class Client4 < EM::Nodes::Client
 end
 
 class Server4 < EM::Nodes::Server
-  include Task
+  include TaskFeature
 
   def on_task_result(res)
     $server4_results << res

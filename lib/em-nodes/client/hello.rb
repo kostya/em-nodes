@@ -1,5 +1,5 @@
 class EM::Nodes::Client
-  module Hello
+  module HelloFeature
     def on_who_are_you?
       i = info
       raise "info should be a Hash, but not #{i.inspect}" unless i.is_a?(Hash)

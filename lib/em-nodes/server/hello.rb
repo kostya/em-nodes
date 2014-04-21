@@ -1,5 +1,5 @@
 class EM::Nodes::Server
-  module Hello
+  module HelloFeature
     def self.included(base)
       base.send :extend, ClassMethods
     end

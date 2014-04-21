@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 class Client3 < EM::Nodes::Client
-  include Hello
+  include HelloFeature
 
   def info
     { :name => "vasya" }
@@ -9,7 +9,7 @@ class Client3 < EM::Nodes::Client
 end
 
 class Server3 < EM::Nodes::Server
-  include Hello
+  include HelloFeature
 
   def on_i_am(params)
     super

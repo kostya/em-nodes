@@ -3,8 +3,8 @@ require "bundler/setup"
 Bundler.require
 
 class Client < EM::Nodes::Client
-  include Hello
-  include Task
+  include HelloFeature
+  include TaskFeature
 
   def info
     { :name => "client" }
