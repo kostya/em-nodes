@@ -30,6 +30,8 @@ class EM::Nodes::Server < EM::Connection
   end
 
   def post_init
+    @data = OpenStruct.new
+
     self.comm_inactivity_timeout = inactivity_timeout
 
     port, host = Socket.unpack_sockaddr_in(get_peername) rescue []
@@ -37,8 +39,9 @@ class EM::Nodes::Server < EM::Connection
       unbind
       return
     end
+    self.data.host = host
+    self.data.port = port
 
-    @data = OpenStruct.new
     @alive = true
     self.class.clients << self
     EM::Nodes.logger.info "Incomming connection from #{host}:#{port}"

@@ -1,6 +1,6 @@
 require 'rubygems'
 require "bundler/setup"
-Bundler.require 
+Bundler.require
 
 CLIENTS_COUNT = 5
 TASKS_COUNT = 100000
@@ -36,7 +36,7 @@ EM.run do
 
     Server.ready_clients.each do |client|
       client.send_task(0)
-    end    
+    end
   end
 
 end
