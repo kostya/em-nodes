@@ -32,7 +32,7 @@ class EM::Nodes::Server < EM::Connection
   def post_init
     self.comm_inactivity_timeout = inactivity_timeout
 
-    port, host = Socket.unpack_sockaddr_in(get_peername)
+    port, host = Socket.unpack_sockaddr_in(get_peername) rescue []
     unless accept?(host, port)
       unbind
       return
@@ -50,7 +50,7 @@ class EM::Nodes::Server < EM::Connection
     EM::Nodes.logger.info "Client has disconnected"
   end
 
-  def self.start(host, port, *args)
+  def self.start(host, port = nil, *args)
     EM::Nodes.logger.info "start server on #{host}:#{port}"
     EM.start_server host, port, self, *args
   end

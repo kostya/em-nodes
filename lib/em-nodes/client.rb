@@ -16,7 +16,7 @@ class EM::Nodes::Client < EM::Connection
     EM::Nodes.logger.warn "connection has terminated"
   end
 
-  def self.connect(host, port, *args, &block)
+  def self.connect(host, port = nil, *args, &block)
     EM.connect(host, port, self, *args)
   end
 end
