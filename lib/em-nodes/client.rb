@@ -8,12 +8,12 @@ class EM::Nodes::Client < EM::Connection
 
   def post_init
     @alive = true
-    EM::Nodes.logger.debug "Connected to server"
+    EM::Nodes.logger.info "Connected to server"
   end
 
   def unbind
     @alive = false
-    EM::Nodes.logger.warn "connection has terminated"
+    EM::Nodes.logger.warn "Connection has terminated"
   end
 
   def self.connect(host, port = nil, *args, &block)

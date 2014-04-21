@@ -50,11 +50,11 @@ class EM::Nodes::Server < EM::Connection
   def unbind
     @alive = false
     self.class.clients.delete self
-    EM::Nodes.logger.info "Client has disconnected"
+    EM::Nodes.logger.info "Client #{self.data.inspect} has disconnected"
   end
 
   def self.start(host, port = nil, *args)
-    EM::Nodes.logger.info "start server on #{host}:#{port}"
+    EM::Nodes.logger.info "Start server #{host}:#{port}"
     EM.start_server host, port, self, *args
   end
 end
