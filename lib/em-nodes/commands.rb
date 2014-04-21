@@ -7,10 +7,10 @@ module EM::Nodes::Commands
 
     method = "on_#{h[:method]}"
     args = h[:args]
-    EM::Nodes.logger.debug "<= #{method} #{args}"
+    EM::Nodes.logger.debug "<= #{method} #{args.inspect}"
     t = Time.now
     send(method, *args)
-    EM::Nodes.logger.info "<= #{method} #{args} (#{Time.now - t}s)"
+    EM::Nodes.logger.info "<= #{method} #{args.inspect} (#{Time.now - t}s)"
   rescue Object => ex
     EM::Nodes.exception(ex)
   end
