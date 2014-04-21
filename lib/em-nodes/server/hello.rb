@@ -1,5 +1,15 @@
 class EM::Nodes::Server
   module Hello
+    def self.included(base)
+      base.send :extend, ClassMethods
+    end
+
+    module ClassMethods
+      def ready_clients
+        clients.select{ |cl| cl.data.ready }
+      end
+    end
+
     def post_init
       super
       send_who_are_you?
@@ -10,7 +20,7 @@ class EM::Nodes::Server
         self.data.send "#{key}=", value
       end
 
-      self.data.trusted = true
+      self.data.ready = true
     end
   end
 end

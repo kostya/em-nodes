@@ -14,6 +14,7 @@ class Server3 < EM::Nodes::Server
   def on_i_am(params)
     super
     $client3_result = self.data
+    $server3_ready_clients = Server3.ready_clients
     EM.stop
   end
 end
@@ -26,5 +27,6 @@ describe "Hello spec" do
     end
 
     $client3_result.name.should == 'vasya'
+    $server3_ready_clients.size.should == 1
   end
 end
