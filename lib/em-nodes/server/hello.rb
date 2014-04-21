@@ -21,6 +21,7 @@ class EM::Nodes::Server
       end
 
       self.data.ready = true
+      EM::Nodes.logger.info "Hello client #{self.data.inspect}"
     end
   end
 end
