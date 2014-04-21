@@ -7,7 +7,7 @@ class EM::Nodes::Server
 
     def on_i_am(params)
       params.each do |key, value|
-        self.data[key] = value
+        self.data.send "#{key}=", value
       end
 
       self.data.trusted = true
