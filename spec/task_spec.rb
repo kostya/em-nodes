@@ -31,6 +31,7 @@ describe "Task spec" do
   }
 
   it "should work" do
+    client4 = nil
     EM.run do
       $server4 = Server4.start('127.0.0.1', 19995)
       $client4 = Client4.connect('127.0.0.1', 19995)
@@ -43,6 +44,7 @@ describe "Task spec" do
 
     $server4_results.should == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     $server4_unbind_results.should == []
+    client4.task_count.should == 0
   end
 
   it "on unbind" do
