@@ -5,7 +5,7 @@ module EM::Nodes::AbstractCommand
     method = method.to_s
 
     unless method.start_with?(COMMAND_PREFIX)
-      EM::Nodes.logger.warn "unknown send :#{method} #{args.inspect}"
+      EM::Nodes.logger.warn { "unknown send :#{method} #{args.inspect}" }
       super(method, *args)
       return
     end
@@ -13,7 +13,7 @@ module EM::Nodes::AbstractCommand
     if @alive
       send_command(method[5..-1], args)
     else
-      EM::Nodes.logger.error "failed command attempt #{method}, connection dead"
+      EM::Nodes.logger.error { "failed command attempt #{method}, connection dead" }
     end
   end
 end

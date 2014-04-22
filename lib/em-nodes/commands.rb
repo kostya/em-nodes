@@ -1,7 +1,7 @@
 module EM::Nodes::Commands
   def receive_object(h)
     unless h.is_a?(Hash)
-      EM::Nodes.logger.error "received unknown object: #{h.inspect}"
+      EM::Nodes.logger.error { "received unknown object: #{h.inspect}" }
       return
     end
 
