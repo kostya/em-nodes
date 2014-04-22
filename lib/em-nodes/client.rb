@@ -5,6 +5,8 @@ class EM::Nodes::Client < EM::Connection
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
 
+  attr_reader :alive
+
   def post_init
     @alive = true
     EM::Nodes.logger.info { "Connected to server" }

@@ -8,6 +8,8 @@ class EM::Nodes::Server < EM::Connection
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
 
+  attr_reader :alive
+
   class << self
     def clients
       @clients ||= []
