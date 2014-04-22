@@ -1,12 +1,7 @@
 module EM::Nodes::Commands
   def receive_object(h)
-    unless h.is_a?(Hash)
-      EM::Nodes.logger.error { "received unknown object: #{h.inspect}" }
-      return
-    end
-
-    method = "on_#{h[:method]}"
-    args = h[:args]
+    method, args = h
+    method = 'on_' + method
     t = Time.now
     send(method, *args)
     EM::Nodes.logger.debug { "<= #{method} #{args.inspect} (#{Time.now - t}s)" }
@@ -16,8 +11,7 @@ module EM::Nodes::Commands
   end
 
   def send_command(method, args)
-    obj = {:method => method, :args => args}
     EM::Nodes.logger.debug { "=> #{method}" }
-    EM.schedule { send_object(obj) }
+    EM.schedule { send_object([method, args]) }
   end
 end
