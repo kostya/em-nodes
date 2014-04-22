@@ -32,7 +32,7 @@ class EM::Nodes::Server < EM::Connection
   def post_init
     @data = OpenStruct.new
 
-    self.comm_inactivity_timeout = inactivity_timeout
+    self.comm_inactivity_timeout = inactivity_timeout if EM.reactor_running?
 
     port, host = Socket.unpack_sockaddr_in(get_peername) rescue []
     unless accept?(host, port)
