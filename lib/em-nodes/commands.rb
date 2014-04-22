@@ -9,7 +9,7 @@ module EM::Nodes::Commands
     args = h[:args]
     t = Time.now
     send(method, *args)
-    EM::Nodes.logger.debug "<= #{method} #{args.inspect} (#{Time.now - t}s)"
+    EM::Nodes.logger.debug { "<= #{method} #{args.inspect} (#{Time.now - t}s)" }
 
   rescue Object => ex
     EM::Nodes.exception(ex)
@@ -17,7 +17,7 @@ module EM::Nodes::Commands
 
   def send_command(method, args)
     obj = {:method => method, :args => args}
-    EM::Nodes.logger.debug "=> #{method}"
+    EM::Nodes.logger.debug { "=> #{method}" }
     EM.schedule { send_object(obj) }
   end
 end
