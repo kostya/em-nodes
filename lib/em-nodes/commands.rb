@@ -13,7 +13,7 @@ module EM::Nodes::Commands
 
   def send_command(method, args)
     EM::Nodes.logger.debug { "=> #{method}" }
-    EM.schedule { send_object([method, args]) }
+    EM.schedule { send_object [method.to_s, args] }
   end
 
   COMMAND_PREFIX = 'send_'
