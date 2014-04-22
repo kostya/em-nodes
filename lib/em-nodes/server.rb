@@ -7,7 +7,6 @@ class EM::Nodes::Server < EM::Connection
 
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
-  include EM::Nodes::AbstractCommand
 
   class << self
     def clients

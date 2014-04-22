@@ -4,7 +4,6 @@ class EM::Nodes::Client < EM::Connection
 
   include EM::P::ObjectProtocol
   include EM::Nodes::Commands
-  include EM::Nodes::AbstractCommand
 
   def post_init
     @alive = true
