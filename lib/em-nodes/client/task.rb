@@ -1,11 +1,14 @@
 class EM::Nodes::Client
   module TaskFeature
-    def on_task_internal(task_id, data)
-      on_task(task_id, data)
-    end
 
     def on_task(task_id, data)
       # redefine me
+    end
+
+  private
+
+    def on_task_internal(task_id, data)
+      on_task(task_id, data)
     end
 
     def send_task_result(task_id, result)

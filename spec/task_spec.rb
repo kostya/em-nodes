@@ -18,7 +18,7 @@ class Server4 < EM::Nodes::Server
     EM.next_tick { EM.stop } if $server4_results.size >= 10
   end
 
-  def callback_reschedule_tasks(values)
+  def on_reschedule_tasks(values)
     $server4_unbind_results = values
   end
 end

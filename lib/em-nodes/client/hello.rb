@@ -1,8 +1,5 @@
 class EM::Nodes::Client
   module HelloFeature
-    def __default_info__
-      { :hostname => (`hostname` rescue "").chop }
-    end
 
     def on_who_are_you?
       i = info
@@ -11,7 +8,14 @@ class EM::Nodes::Client
     end
 
     def info
-      raise "implement me"
+      {} # redefine me
     end
+
+  private
+
+    def __default_info__
+      { :hostname => (`hostname` rescue "").chop }
+    end
+
   end
 end

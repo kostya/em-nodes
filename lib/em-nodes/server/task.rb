@@ -13,8 +13,31 @@ class EM::Nodes::Server
       @mutex.synchronize { @tasks.size }
     end
 
-    def next_task_id
-      @mutex.synchronize { @task_inc += 1 }
+    def send_task(data)
+      task_id = next_task_id
+      add_task(task_id, data)
+      send_task_internal(task_id, data)
+    end
+
+    def on_task_result(res)
+      # redefine me
+    end
+
+    def on_reschedule_tasks(values)
+      # redefine me
+    end
+
+    def unbind
+      super
+      on_reschedule_tasks(@tasks.values)
+      @mutex.synchronize { @tasks.clear }
+    end
+
+  private
+
+    def on_task_result_internal(task_id, res)
+      del_task(task_id)
+      on_task_result(res)
     end
 
     def add_task(task_id, data)
@@ -25,29 +48,9 @@ class EM::Nodes::Server
       @mutex.synchronize { @tasks.delete(task_id) }
     end
 
-    def send_task(data)
-      task_id = next_task_id
-      add_task(task_id, data)
-      send_task_internal(task_id, data)
+    def next_task_id
+      @mutex.synchronize { @task_inc += 1 }
     end
 
-    def on_task_result_internal(task_id, res)
-      del_task(task_id)
-      on_task_result(res)
-    end
-
-    def on_task_result(res)
-      # redefine me
-    end
-
-    def unbind
-      super
-      callback_reschedule_tasks(@tasks.values)
-      @mutex.synchronize { @tasks.clear }
-    end
-
-    def callback_reschedule_tasks(values)
-      # redefine me
-    end
   end
 end
