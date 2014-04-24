@@ -1,6 +1,6 @@
-module EM
+module EventMachine
 end
 
-module EM::Nodes
+module EventMachine::Nodes
   VERSION = "0.2.1"
 end

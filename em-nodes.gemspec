@@ -5,7 +5,7 @@ require 'em-nodes/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "em-nodes"
-  spec.version       = EM::Nodes::VERSION
+  spec.version       = EventMachine::Nodes::VERSION
   spec.authors       = ["'Konstantin Makarchev'"]
   spec.email         = ["'kostya27@gmail.com'"]
   spec.summary       = %q{Simple EM client server, and some stuffs}
