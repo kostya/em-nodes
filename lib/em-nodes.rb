@@ -24,3 +24,5 @@ module EM::Nodes
   autoload :Commands,         'em-nodes/commands'
   autoload :AbstractCommand,  'em-nodes/abstract_command'
 end
+
+require 'em-nodes/adapter'
