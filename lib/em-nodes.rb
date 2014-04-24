@@ -1,5 +1,6 @@
 require 'eventmachine'
 require 'logger'
+require 'em-nodes/em_hacks'
 
 module EM::Nodes
   VERSION = "0.2"
