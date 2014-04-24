@@ -3,8 +3,6 @@ require 'logger'
 require 'em-nodes/em_hacks'
 
 module EM::Nodes
-  VERSION = "0.2"
-
   class << self
     def logger=(logger)
       @_logger = logger
