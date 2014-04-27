@@ -21,6 +21,9 @@ module EM::Nodes
   autoload :Server,           'em-nodes/server'
   autoload :Commands,         'em-nodes/commands'
   autoload :AbstractCommand,  'em-nodes/abstract_command'
+
+  autoload :DefaultClient,    'em-nodes/default_client'
+  autoload :DefaultServer,    'em-nodes/default_server'
 end
 
 require 'em-nodes/adapter'
