@@ -5,10 +5,7 @@ Bundler.require
 CLIENTS_COUNT = 5
 TASKS_COUNT = 100000
 
-class Server < EM::Nodes::Server
-  include HelloFeature
-  include TaskFeature
-
+class Server < EM::Nodes::DefaultServer
   def on_task_result(res)
     $res_count += 1
     $res += res
