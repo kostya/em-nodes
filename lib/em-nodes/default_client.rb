@@ -3,7 +3,7 @@ class EM::Nodes::DefaultClient < EM::Nodes::Client
   include TaskFeature
 
   def unbind
-    super    
+    super
     EM.next_tick { EM.stop }
   end
 end

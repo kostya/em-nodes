@@ -15,7 +15,7 @@ $res = 0
 $res_count = 0
 $mutex = Mutex.new
 
-tm = Time.now 
+tm = Time.now
 clients.map do |cl|
   Thread.new do
     data = 0
@@ -24,7 +24,7 @@ clients.map do |cl|
       $mutex.synchronize do
         $res_count += 1
         $res += data
-        if $res_count >= TASKS_COUNT          
+        if $res_count >= TASKS_COUNT
           puts "executed with #{Time.now - tm}, res: #{$res}, res_count: #{$res_count}"
           exit
         end

@@ -23,5 +23,10 @@ class EM::Nodes::Server
       self.data.ready = true
       EM::Nodes.logger.info { "Hello client #{self.data.inspect}" }
     end
+
+    def unbind
+      super
+      self.data.ready = false
+    end
   end
 end

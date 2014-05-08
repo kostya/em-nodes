@@ -31,6 +31,7 @@ class EM::Nodes::Server < EM::Connection
   end
 
   def post_init
+    super
     @data = OpenStruct.new
 
     self.comm_inactivity_timeout = inactivity_timeout if EM.reactor_running?
@@ -49,6 +50,7 @@ class EM::Nodes::Server < EM::Connection
   end
 
   def unbind
+    super
     @alive = false
     self.class.clients.delete self
     EM::Nodes.logger.info { "Client #{self.data.inspect} has disconnected" }
