@@ -9,7 +9,6 @@ class EM::Nodes::Client < EM::Connection
 
   def post_init
     @alive = true
-    EM::Nodes.logger.info { "Connected to server" }
   end
 
   def unbind
@@ -18,6 +17,7 @@ class EM::Nodes::Client < EM::Connection
   end
 
   def self.connect(host, port = nil, *args, &block)
+    EM::Nodes.logger.info { "Connecting to server #{host}:#{port}" }
     EM.connect(host, port, self, *args)
   end
 end
