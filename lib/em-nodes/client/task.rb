@@ -3,6 +3,7 @@ class EM::Nodes::Client
 
     def on_task(task_id, data)
       # redefine me
+      # after task done, should call send_task_result(task_id, result)
     end
 
   private
