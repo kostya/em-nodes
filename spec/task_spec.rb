@@ -34,9 +34,10 @@ describe "Task spec" do
     client4 = nil
     EM.run do
       $server4 = Server4.start('127.0.0.1', 19995)
+      sleep 0.1
       $client4 = Client4.connect('127.0.0.1', 19995)
 
-      EM.next_tick do
+      EM.add_timer(0.1) do
         client4 = Server4.clients.first
         10.times { |i| client4.send_task(i) }
       end
@@ -52,7 +53,7 @@ describe "Task spec" do
       $server4 = Server4.start('127.0.0.1', 19996)
       $client4 = Client4.connect('127.0.0.1', 19996)
 
-      EM.next_tick do
+      EM.add_timer(0.1) do
         client4 = Server4.clients.first
         20.times { |i| client4.send_task(i) }
       end

@@ -37,7 +37,7 @@ describe "write task object, to prevent GC" do
       $server5 = Server5.start('127.0.0.1', 19997)
       $client5 = Client5.connect('127.0.0.1', 19997)
 
-      EM.next_tick do
+      EM.add_timer(0.1) do
         client5 = Server5.clients.first
         10.times { |i| client5.send_task(i) }
       end
@@ -45,6 +45,7 @@ describe "write task object, to prevent GC" do
       EM.add_timer(0.5) do
         $server5_results.should be_empty
         $client5.tasks.size.should == 10
+        $client5.tasks.values.map(&:time).compact.size.should == 10
       end
     end
 
