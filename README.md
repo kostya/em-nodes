@@ -36,7 +36,7 @@ end
 simple_client.rb
 ```ruby
 class Client < EM::Nodes::Client
-  def on_server_request(value)
+  def on_client_request(value)
     send_client_responce(value + 1)
   end
 end
@@ -48,6 +48,49 @@ end
 ```
 
 ### HelloFeature
+
+HelloFeature used to simple greetings between client and server. Client should define method `info` which return hash. And add to server list of active clients: `ready_clients`.
+
+hello_server.rb
+```ruby
+class Server < EM::Nodes::Server
+  include HelloFeature
+end
+
+EM.run do
+  Server.start "/tmp/server.sock"
+
+  EM.add_periodic_timer(5) do
+    vasya = Server.ready_clients.detect { |client| client.data.my_name == 'Vasya' }
+    vasya.send_die if vasya
+  end
+end
+```
+
+hello_client.rb
+```ruby
+class Client < EM::Nodes::Client
+  include HelloFeature
+
+  def initialize(name)
+    @name = name
+    super
+  end
+
+  def info
+    { :my_name => @name }
+  end
+
+  def on_die
+    puts "oops i should die"
+    EM.stop
+  end
+end
+
+EM.run do
+  client = Client.connect "/tmp/server.sock", nil, "Vasya"
+end
+```
 
 ### TaskFeature
 
@@ -78,8 +121,6 @@ end
 default_client.rb
 ```ruby
 class Client < EM::Nodes::DefaultClient
-
-  # info used in Hello feature, should return hash, with some client info
   def info
     { :name => 'bla' }
   end
@@ -100,3 +141,5 @@ EM.run do
   end
 end
 ```
+
+[More examples](https://github.com/kostya/em-nodes/tree/master/examples)

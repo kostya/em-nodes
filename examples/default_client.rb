@@ -7,8 +7,6 @@ l.level = Logger::INFO
 EM::Nodes.logger = l
 
 class Client < EM::Nodes::DefaultClient
-
-  # info used in Hello feature, should return hash, with some client info
   def info
     { :name => 'bla' }
   end
