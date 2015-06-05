@@ -14,5 +14,7 @@ end
 
 EM.run do
   puts "client run"
-  Client.connect '/tmp/test_em_nodes_sock'
+  EM.add_timer(0.1) do
+    Client.connect '/tmp/test_em_nodes_sock'
+  end
 end
