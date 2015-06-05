@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = EventMachine::Nodes::VERSION
   spec.authors       = ["'Konstantin Makarchev'"]
   spec.email         = ["'kostya27@gmail.com'"]
-  spec.summary       = %q{Simple EM client server, and some stuffs}
-  spec.description   = %q{Simple EM client server, and some stuffs}
+  spec.summary       = %q{Simple abstraction on top of EventMachine for easy create clients, servers, workers, ...}
+  spec.description   = %q{Simple abstraction on top of EventMachine for easy create clients, servers, workers, ...}
   spec.homepage      = "https://github.com/kostya/em-nodes"
   spec.license       = "MIT"
 
