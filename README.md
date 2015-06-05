@@ -148,7 +148,7 @@ class Server < EM::Nodes::DefaultServer
 end
 
 EM.run do
-  Server.start "/tmp/server.sock"
+  Server.start "127.0.0.1", 8888
 
   # periodical schedule tasks to clients
   EM.add_periodic_timer(1) do
@@ -178,7 +178,7 @@ end
 
 EM.run do
   10.times do
-    Client.connect "/tmp/server.sock"
+    Client.connect "127.0.0.1", 8888
   end
 end
 ```

@@ -23,6 +23,6 @@ end
 
 EM.run do
   10.times do
-    Client.connect "/tmp/server.sock"
+    Client.connect "127.0.0.1", 8888
   end
 end
