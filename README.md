@@ -49,7 +49,7 @@ end
 
 ### HelloFeature
 
-HelloFeature used to simple greetings between client and server. Client should define method `info` which return hash. And add to server list of active clients: `ready_clients`.
+HelloFeature used to simple greetings between client and server. Client should define method `info` which return hash. Server had added method: `ready_clients`, which contain clients which answered on `info` method.
 
 hello_server.rb
 ```ruby
@@ -94,9 +94,50 @@ end
 
 ### TaskFeature
 
+TaskFeature is simple task sending, executing and getting results. Client should define method `on_task(task_id, param)`, and when execute task and got results, should call `send_task_result(task_id, result)`. Server should send task with method, `send_task(param)`
+
+Example:
+
+task_server.rb
+```ruby
+class Server < EM::Nodes::Server
+  include TaskFeature
+
+  def on_get_me_task
+    param = rand
+    puts "send to client #{param}"
+    send_task(param)
+  end
+
+  def on_task_result(result)
+    puts "client return result #{result}"
+  end
+end
+
+EM.run do
+  Server.start "/tmp/server.sock"
+end
+```
+
+task_client.rb
+```ruby
+class Client < EM::Nodes::Client
+  include TaskFeature
+
+  def on_task(task_id, param)
+    EM.next_tick { send_task_result(task_id, param + 1) }
+  end
+end
+
+EM.run do
+  client = Client.connect "/tmp/server.sock"
+  client.send_get_me_task
+end
+```
+
 ### DefaultClient, DefaultServer
 
-This is abstraction with Hello and Task features by default. Example how to create server and 10 workers. Server schedule for each client every 1 second, some value. Client just add 1 to value and return result to server, server puts value.
+This is abstraction with HelloFeature and TaskFeature by default. Example how to create server and 10 workers. Server schedule for each client every 1 second, some value. Client just add 1 to value and return result to server, server puts value.
 
 default_server.rb
 ```ruby
