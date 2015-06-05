@@ -96,7 +96,7 @@ end
 
 TaskFeature is simple task sending, executing and getting results. Client should define method `on_task(task_id, param)`, and when execute task and got results, should call `send_task_result(task_id, result)`. Server should send task with method, `send_task(param)`
 
-Example:
+Example: Client after connection send to server `get_me_task`, server send_task to client with rand value, client execute `on_task` method and add to param 1 and call `send_task_result`, server receive `on_task_result` and output result.
 
 task_server.rb
 ```ruby
