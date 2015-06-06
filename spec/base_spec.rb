@@ -31,8 +31,9 @@ end
 describe "Base spec" do
   it "base callbacks should work" do
     EM.run do
-      $server0 = Server0.start('/tmp/emn_server0.sock')
-      $client0 = Client0.connect('/tmp/emn_server0.sock')
+      host, port = (RUBY_PLATFORM =~ /java/) ? ['127.0.0.1', 19999] : ['/tmp/emn_server0.sock']
+      $server0 = Server0.start(host, port)
+      $client0 = Client0.connect(host, port)
 
       EM.next_tick do
         $client0.bla.should == 1
