@@ -37,11 +37,16 @@ class EM::Nodes::Server < EM::Connection
     self.comm_inactivity_timeout = inactivity_timeout if EM.reactor_running?
 
     port, host = Socket.unpack_sockaddr_in(get_peername) rescue []
-    host = Socket.unpack_sockaddr_un(get_sockname) unless host
+
+    unless host
+      host = Socket.unpack_sockaddr_un(get_sockname) rescue nil
+    end
+
     unless accept?(host, port)
       unbind
       return
     end
+
     self.data.host = host
     self.data.port = port
 

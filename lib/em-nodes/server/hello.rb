@@ -6,7 +6,7 @@ class EM::Nodes::Server
 
     module ClassMethods
       def ready_clients
-        clients.select{ |cl| cl.data.ready }
+        alive_clients.select{ |cl| cl.data.ready }
       end
     end
 
