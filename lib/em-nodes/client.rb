@@ -17,7 +17,7 @@ class EM::Nodes::Client < EM::Connection
   end
 
   def self.connect(host, port = nil, *args, &block)
-    EM::Nodes.logger.info { "Connecting to server #{host}:#{port}" }
+    EM::Nodes.logger.info { "Connecting to server #{host}#{port ? ':' + port.to_s : nil}" }
     EM.connect(host, port, self, *args)
   end
 end

@@ -37,6 +37,7 @@ class EM::Nodes::Server < EM::Connection
     self.comm_inactivity_timeout = inactivity_timeout if EM.reactor_running?
 
     port, host = Socket.unpack_sockaddr_in(get_peername) rescue []
+    host = Socket.unpack_sockaddr_un(get_sockname) unless host
     unless accept?(host, port)
       unbind
       return
@@ -57,7 +58,7 @@ class EM::Nodes::Server < EM::Connection
   end
 
   def self.start(host, port = nil, *args)
-    EM::Nodes.logger.info { "Start server #{host}:#{port}" }
+    EM::Nodes.logger.info { "Start server #{host}#{port ? ':' + port.to_s : nil}" }
     EM.start_server host, port, self, *args
   end
 end
