@@ -31,8 +31,8 @@ end
 describe "Base spec" do
   it "base callbacks should work" do
     EM.run do
-      $server0 = Server0.start('/tmp/_emn_server0')
-      $client0 = Client0.connect('/tmp/_emn_server0')
+      $server0 = Server0.start('/tmp/emn_server0.sock')
+      $client0 = Client0.connect('/tmp/emn_server0.sock')
 
       EM.next_tick do
         $client0.bla.should == 1

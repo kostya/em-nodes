@@ -26,6 +26,6 @@ describe "Simple spec" do
       $client22.send_ping(2)
     end
 
-    $pong.should == [2, 3]
+    $pong.sort.should == [2, 3]
   end
 end
