@@ -1,6 +1,7 @@
 require 'eventmachine'
 require 'logger'
 require 'em-nodes/em_hacks'
+require 'em-nodes/version'
 
 module EM::Nodes
   class << self
