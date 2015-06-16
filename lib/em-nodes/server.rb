@@ -26,6 +26,10 @@ class EM::Nodes::Server < EM::Connection
     true
   end
 
+  def alive?
+    @alive
+  end
+
   def inactivity_timeout
     10 * 60 # 10 minutes default
   end
