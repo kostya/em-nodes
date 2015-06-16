@@ -11,6 +11,10 @@ class EM::Nodes::Client < EM::Connection
     @alive = true
   end
 
+  def alive?
+    @alive
+  end
+
   def unbind
     @alive = false
     EM::Nodes.logger.warn { "Connection has terminated" }
