@@ -1,5 +1,10 @@
 class EM::Nodes::Client
   module TaskFeature
+    def initialize(*args)
+      super(*args)
+      @mutex = Mutex.new
+      @tasks_hash = {}
+    end
 
     def on_task(task_id, data)
       # redefine me
@@ -7,19 +12,19 @@ class EM::Nodes::Client
     end
 
     def tasks
-      @tasks ||= {}
+      @tasks_hash.values
     end
 
     def send_task_result(task_id, result)
       send_task_result_internal(task_id, result)
-      tasks.delete(task_id)
+      @mutex.synchronize { @tasks_hash.delete(task_id) }
     end
 
   private
 
     def on_task_internal(task_id, data)
       obj = on_task(task_id, data)
-      tasks[task_id] = obj
+      @mutex.synchronize { @tasks_hash[task_id] = obj }
     end
   end
 end

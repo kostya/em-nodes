@@ -45,11 +45,12 @@ describe "write task object, to prevent GC" do
       EM.add_timer(0.5) do
         $server5_results.should be_empty
         $client5.tasks.size.should == 10
-        $client5.tasks.values.map(&:time).compact.size.should == 10
+        $client5.tasks.map(&:time).compact.size.should == 10
       end
     end
 
     $server5_results.size.should == 10
     $client5.tasks.size.should == 0
+    $client5.tasks.is_a?(Array).should == true
   end
 end
